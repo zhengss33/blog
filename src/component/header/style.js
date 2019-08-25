@@ -44,15 +44,21 @@ export const NavItem = styled.div`
 
 export const NavWrapper = styled.div`
 	float: left;
+	position: relative;
 	margin: 11px 0 0 20px;
 	background: #eee;
 	border-radius: 19px;
+
+	.search-icon {
+		padding: 10px;
+		border-radius: 50%;
+	}
 
 	&.slide-enter {
 		input {
 			transition: all .2s ease-out;
 		}
-		.iconfont {
+		.search-icon {
 			transition: all .2s ease-out;
 		}
 	}
@@ -61,7 +67,7 @@ export const NavWrapper = styled.div`
 		input {
 			width: 240px;
 		}
-		.iconfont {
+		.search-icon {
 			background: #ccc;
 		}
 	}
@@ -70,7 +76,7 @@ export const NavWrapper = styled.div`
 		input {
 			transition: all .2s ease-out;
 		}
-		.iconfont {
+		.search-icon {
 			transition: all .2s ease-out;
 		}
 	}
@@ -79,21 +85,17 @@ export const NavWrapper = styled.div`
 		input {
 			width: 160px;
 		}
-		.iconfont {
+		.search-icon {
 			background: transparent;
 		}
 	}
 
-	.iconfont {
-		padding: 10px;
-		border-radius: 50%;
-	}
 	&.focused {
 		input{
 			width: 200px;
 		}
 
-		.iconfont {
+		.search-icon {
 			background: #ccc;
 		}
 	}
@@ -115,6 +117,49 @@ export const NavSearch = styled.input.attrs({
 		color: #999;
 	}
 `;
+
+export const SearchInfo = styled.div`
+	position: absolute;
+	left: 0;
+	top: 47px;
+	width: 240px;
+	padding: 0 20px 10px 20px;
+	box-shadow: 0 6px 8px rgba(0, 0, 0, .2);
+	overflow: hidden;
+`;
+
+export const SearchInfoTitle = styled.div`
+	margin-top: 20px;
+	margin-bottom: 15px;
+	line-height: 20px;
+	font-size: 14px;
+	color: #969696;
+`;
+
+export const SearchInfoSwitch = styled.div`
+	float: right;
+	font-size: 13px;
+	cursor: pointer;
+
+	.change-icon {
+		float: left;
+		vertical-align: -2px;
+		transition: all 0.5s ease;
+		transform-origin: center center;		
+	}
+`;
+
+export const SearchInfoItem = styled.a`
+	float: left;
+	margin: 0 10px 5px 0;
+	padding: 0 5px;
+	line-height: 20px;
+	font-size: 12px;
+	color: #787878;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	cursor: pointer;
+`
 
 export const Addiction = styled.div`
 	position: absolute;
@@ -140,4 +185,4 @@ export const Button = styled.div`
 		background: #ea6f5a;
 		color: #fff;
 	}
-`
+`;
