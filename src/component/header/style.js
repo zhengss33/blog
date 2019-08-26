@@ -124,6 +124,7 @@ export const SearchInfo = styled.div`
 	top: 47px;
 	width: 240px;
 	padding: 0 20px 10px 20px;
+	background: #fff;
 	box-shadow: 0 6px 8px rgba(0, 0, 0, .2);
 	overflow: hidden;
 `;

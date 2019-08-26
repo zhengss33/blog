@@ -69,20 +69,23 @@ class Header extends Component {
 	}
 
 	handleSearhFocus () {
-		axios.get('/api/trending_search.json').then(res => {
-			const data = res.data
-			if (data.success) {
-				this.setState(() => ({
-					searchList: data.data,
-					searchTotalPage: Math.ceil(data.data.length / this.state.trendingCount)
-				}));
-			} else {
-				console.log(`network error`);
-			}
-		}).catch(err => {
-			console.log(err);
-		})
 		this.setState(() => ({ isFocused: true }))
+
+		if (!this.state.searchList.length) {
+			axios.get('/api/trending_search.json').then(res => {
+				const data = res.data
+				if (data.success) {
+					this.setState(() => ({
+						searchList: data.data,
+						searchTotalPage: Math.ceil(data.data.length / this.state.trendingCount)
+					}));
+				} else {
+					console.log(`network error`);
+				}
+			}).catch(err => {
+				console.log(err);
+			})
+		}
 	}
 
 	handleSearchBlur () {
@@ -132,7 +135,6 @@ class Header extends Component {
 			rotate = parseInt(rotateAngle, 10)
 		}
 		changeIcon.style.transform = `rotate(${rotate + 360}deg)`;
-		console.log(changeIcon, rotateAngle)
 		const { searchTotalPage, searchPage } = this.state;
 		let page = 1;
 		if (searchPage < searchTotalPage) {
