@@ -1,15 +1,25 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
   HomeWrapper,
   HomeLeft,
-  HomeRight
+  HomeRight,
+  BackTop
 } from './style';
 import List from './component/List';
 import Writer from './component/Writer';
 import Recommend from './component/Recommend';
+import * as actionCreators from './store/actionCreators'
 
-class Home extends Component {
+class Home extends PureComponent {
+  constructor (props) {
+    super(props);
+    this.state = {
+      isShowScrollTop: false
+    }
+    this.changeScrollTop = this.changeScrollTop.bind(this);
+  }
+
   render(h) {
     return (
       <div>
@@ -25,22 +35,40 @@ class Home extends Component {
             <Recommend></Recommend>
             <Writer></Writer>
           </HomeRight>
+          { this.state.isShowScrollTop ? <BackTop onClick={this.handleScrollTop}>顶部</BackTop> : null }
         </HomeWrapper>
       </div>
     )
   }
-}
 
-const mapStateToProps = state => {
-  return {
+  componentDidMount() {
+    this.props.getHomeData();
+    window.addEventListener('scroll', this.changeScrollTop);
+  }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.changeScrollTop)
+  }
+
+  changeScrollTop() {
+    const scrollTop = document.documentElement.scrollTop;
+    this.setState(() => ({
+      isShowScrollTop: scrollTop > 200
+    })) 
+  }
+  
+  handleScrollTop() {
+    window.scrollTo(0, 0);
   }
 }
 
-const mapDispathToProps = dispatch => {
-  return {
+const mapStateToProps = state => ({
+})
 
+const mapDispathToProps = dispatch => ({
+  getHomeData(){
+    dispatch(actionCreators.getHomeData());
   }
-}
+})
 
 export default connect(mapStateToProps, mapDispathToProps)(Home);

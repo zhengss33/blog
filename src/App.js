@@ -9,11 +9,11 @@ function App() {
   return (
     <div>
       <Globalstyle/>
-      <Header/>
       <BrowserRouter>
         <div>
-          <Route path="/" exact render={() => <Home/>}></Route>
-          <Route path="/detail" exact render={() => <Detail/>}></Route>
+          <Header/>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/detail/:id" exact component={Detail}></Route>
         </div>
       </BrowserRouter>
     </div>
